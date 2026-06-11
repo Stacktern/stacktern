@@ -1,4 +1,6 @@
-﻿function SparklesIcon({ className = "" }: { className?: string }) {
+﻿import Link from "next/link";
+
+function SparklesIcon({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
       <path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
@@ -37,6 +39,23 @@ function ExternalLinkIcon({ className = "" }: { className?: string }) {
   );
 }
 
+function BookOpenIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="M2 5h7a4 4 0 014 4v11a3 3 0 00-3-3H2V5z" />
+      <path d="M22 5h-7a4 4 0 00-4 4v11a3 3 0 013-3h8V5z" />
+    </svg>
+  );
+}
+
+function ChevronRightIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 20 20" fill="currentColor" className={className} aria-hidden="true">
+      <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" />
+    </svg>
+  );
+}
+
 const products = [
   {
     id: "llm",
@@ -54,6 +73,25 @@ const products = [
     link: "https://huggingface.co/debojitbasak/gemma3-270m-personal-assistant-v1",
     linkLabel: "View on HuggingFace",
     linkColor: "text-cyan-400 hover:text-cyan-300",
+    descriptionHref: null,
+  },
+  {
+    id: "learn-ai",
+    icon: BookOpenIcon,
+    iconStyle: "bg-blue-500/10 border border-blue-500/20 text-blue-400",
+    cardHover: "hover:border-blue-500/25 hover:shadow-[0_0_40px_rgba(59,130,246,0.06)]",
+    category: "EdTech · AI Tutor",
+    categoryStyle: "bg-blue-500/10 text-blue-400 border border-blue-500/20",
+    name: "LearnAI Tutor",
+    model: null,
+    description:
+      "An interactive, modern educational web app that teaches Data Science & Machine Learning fundamentals through 10 hands-on lessons, interactive simulators, and an AI tutor (Gemini 2.5 Flash) available on every page.",
+    status: "Live",
+    statusStyle: "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20",
+    link: "https://learn-ai-neon-six.vercel.app/",
+    linkLabel: "Open Live App",
+    linkColor: "text-blue-400 hover:text-blue-300",
+    descriptionHref: "/products/learn-ai",
   },
   {
     id: "statly",
@@ -71,6 +109,7 @@ const products = [
     link: null,
     linkLabel: null,
     linkColor: "",
+    descriptionHref: null,
   },
   {
     id: "trackline",
@@ -88,6 +127,7 @@ const products = [
     link: null,
     linkLabel: null,
     linkColor: "",
+    descriptionHref: null,
   },
 ];
 
@@ -149,17 +189,30 @@ export default function Products() {
                   <p style={{ fontSize: "0.9375rem", color: "#8FA8CC", lineHeight: "1.7" }}>{product.description}</p>
                 </div>
 
-                {/* CTA */}
-                {product.link ? (
-                  <a
-                    href={product.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`inline-flex items-center gap-1.5 text-sm font-medium transition-colors mt-auto pt-2 text-[#00D4C8] hover:text-[#00B8AE]`}
-                  >
-                    {product.linkLabel}
-                    <ExternalLinkIcon className="w-3.5 h-3.5" />
-                  </a>
+                {/* CTAs */}
+                {product.link || product.descriptionHref ? (
+                  <div className="mt-auto pt-3 flex flex-col gap-2.5">
+                    {product.link && (
+                      <a
+                        href={product.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`inline-flex items-center gap-1.5 text-sm font-medium transition-colors ${product.linkColor || "text-[#00D4C8] hover:text-[#00B8AE]"}`}
+                      >
+                        {product.linkLabel}
+                        <ExternalLinkIcon className="w-3.5 h-3.5" />
+                      </a>
+                    )}
+                    {product.descriptionHref && (
+                      <Link
+                        href={product.descriptionHref}
+                        className="inline-flex items-center gap-1.5 text-sm font-medium text-[#8FA8CC] hover:text-white transition-colors"
+                      >
+                        View Full Description
+                        <ChevronRightIcon className="w-3.5 h-3.5" />
+                      </Link>
+                    )}
+                  </div>
                 ) : (
                   <p className="text-xs mt-auto pt-2 italic" style={{ color: "#4A6080" }}>
                     Stay tuned — this one&apos;s in the works.

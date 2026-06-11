@@ -86,7 +86,7 @@ export default function Hero() {
           style={{ background: "rgba(13,21,38,0.45)" }}
         >
           {[
-          { value: "01", label: "AI Model Live" },
+          { value: "02", label: "AI Products Live" },
           { value: "02+", label: "Products in Pipeline" },
           ].map((stat) => (
             <div key={stat.label} className="px-6 py-6 text-center">

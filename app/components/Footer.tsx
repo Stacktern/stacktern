@@ -60,6 +60,16 @@ export default function Footer() {
                   Personal Assistant LLM
                 </a>
               </li>
+              <li>
+                <a
+                  href="https://learn-ai-neon-six.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm hover:text-white transition-colors" style={{ color: "#8FA8CC" }}
+                >
+                  LearnAI Tutor
+                </a>
+              </li>
               <li className="flex items-center gap-2 text-sm" style={{ color: "#4A6080" }}>
                 Statly
                 <span className="text-xs bg-amber-500/10 text-amber-400 border border-amber-500/20 px-1.5 py-0.5 rounded-full">
